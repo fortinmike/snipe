@@ -3,15 +3,13 @@ require 'psych'
 
 module Snipe
   class Config
+    CONFIG_FILE = File.expand_path("~/.snipe")
+
     attr_accessor :api_key
     attr_accessor :from
 
-    def initialize(settings)
-      @settings = settings
-    end
-
     def load
-      yaml = File.read(@settings.config_file)
+      yaml = File.read(CONFIG_FILE)
       loaded = Psych.load(yaml)
 
       @api_key = loaded["api_key"]
@@ -25,7 +23,7 @@ module Snipe
       }
 
       yaml = Psych.dump(to_save)
-      File.write(@settings.config_file, yaml)
+      File.write(CONFIG_FILE, yaml)
     end
   end
 end
