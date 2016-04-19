@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require "claide"
+require "snipe/commands/commands"
+
+Snipe::Command.run(ARGV)
