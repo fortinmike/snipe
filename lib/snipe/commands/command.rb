@@ -9,20 +9,20 @@ module Snipe
     self.command = "snipe"
     self.version = VERSION
     self.description = DESCRIPTION
-    
+
     def self.report_error(exception)
       if exception.instance_of?(SnipeException)
-        Console.log_error(exception.message)
+        puts exception.message
         exit 1
       end
       fail exception
     end
-    
+
     def initialize(argv)
       @argv = argv
       super
     end
-    
+
     def run
       puts "TODO: Send email here"
     end
