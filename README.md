@@ -2,7 +2,7 @@
 
 [![License](http://img.shields.io/:license-mit-blue.svg)](https://github.com/fortinmike/snipe/blob/master/LICENSE)
 
-Track multiple Git repositories side-by-side.
+Easily send one-off emails from scripts using MailGun
 
 ## Installation
 
