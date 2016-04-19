@@ -12,9 +12,12 @@ module Snipe
 
     def run
       cli = HighLine.new
-      api_key = cli.ask "MailGun API Key?"
-      from = cli.ask "Default \"from\" address?"
-      puts "All done!"
+      api_key = cli.ask("MailGun API Key?")
+      from = cli.ask("Default \"from\" address?")  { |q|
+        q.validate = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
+        # TODO: Better response on validation error
+      }
+      puts "All done! You can now send email with snipe."
     end
   end
 end
