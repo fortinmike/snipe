@@ -39,7 +39,11 @@ module Snipe
     def run
       client = Mailgun::Client.new(@api_key)
       params = { from: @from, to: @to, subject: @subject, text: @message }
-      client.send_message(@domain, params)
+      response = client.send_message(@domain, params)
+
+      output_message = response.code == 200 ? "Email Sent" : "Error"
+      body = JSON.parse(response.body)
+      puts "[#{response.code}] #{output_message} : #{body["message"]}"
     end
 
     def assert_configured!
