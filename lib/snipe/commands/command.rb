@@ -1,6 +1,7 @@
 require "claide"
 require "mailgun"
 
+require "snipe/snipe_exception"
 require "snipe/info"
 require "snipe/logic/config"
 
@@ -20,6 +21,8 @@ module Snipe
     end
 
     def initialize(argv)
+      assert_configured!
+
       config = Config.new
       config.load
 
@@ -28,7 +31,6 @@ module Snipe
       @from = argv.option("f") || argv.option("from") || config.from
       @to =  argv.option("t") || argv.option("to") || argv.option("target")
       @message = argv.option("message")
-      puts @message.inspect
       @subject = argv.option("subject") || create_subject(@message)
 
       super
@@ -40,6 +42,10 @@ module Snipe
       client.send_message(@domain, params)
     end
 
+    def assert_configured!
+      fail SnipeException, "Run `snipe init` first!" unless Config.exists?
+    end
+
     def validate!
       help! "You must provide a valid `--from`" unless Validate.email!(@from)
       help! "You must provide a valid `--target`" unless Validate.email!(@to)
@@ -49,6 +55,14 @@ module Snipe
     def create_subject(message)
       return nil unless message
       message.split(" ").take(8).join(" ")
+    end
+
+    def self.report_error(exception)
+      if exception.instance_of?(SnipeException)
+        puts exception.message
+        exit 1
+      end
+      fail exception
     end
   end
 end
