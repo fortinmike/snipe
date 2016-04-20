@@ -14,10 +14,10 @@ snipe is distributed as a cross-platform Ruby Gem:
 
 1. Configure snipe (first time only):
 
-    $ snipe init
+		$ snipe init
 
 2. Send emails
 
-    $ snipe --target=someone@domain.com --message="Hello mister!"
-    $ snipe -to=someone@domain.com -m="Hello mister!"
+	    $ snipe --target=someone@domain.com --message="Hello mister!"
+    	$ snipe -to=someone@domain.com -m="Hello mister!"
 
