@@ -19,5 +19,5 @@ snipe is distributed as a cross-platform Ruby Gem:
 2. Send emails
 
 	    $ snipe --target=someone@domain.com --message="Hello mister!"
-    	$ snipe -to=someone@domain.com -m="Hello mister!"
+    	$ snipe --to=someone@domain.com --m="Hello mister!"
 
