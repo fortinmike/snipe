@@ -6,6 +6,7 @@ module Snipe
     CONFIG_FILE = File.expand_path("~/.snipe")
 
     attr_accessor :api_key
+    attr_accessor :domain
     attr_accessor :from
 
     def load
@@ -13,12 +14,14 @@ module Snipe
       loaded = Psych.load(yaml)
 
       @api_key = loaded["api_key"]
+      @domain = loaded["domain"]
       @from = loaded["from"]
     end
 
     def save
       to_save = {
         "api_key" => @api_key,
+        "domain" => @domain,
         "from" => @from
       }
 
